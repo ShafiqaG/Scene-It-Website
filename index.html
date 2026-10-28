@@ -1,12 +1,32 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Scene It!</title>
-</head>
-<body>
-    <video src="assets/static intro.mp4"
-    
-</body>
+    <link rel="stylesheet" href="stylesheets/intropage.css" />
+    <script src="interactions/interactions.js" defer></script>
+  </head>
+  <body>
+    <main id="main" class="intro">
+      <video
+        id="loop"
+        class="intro"
+        src="assets/static intro.mp4"
+        autoplay
+        loop
+      ></video>
+      <video
+        id="play"
+        class="intro"
+        src="assets/intro animation.mp4"
+        preload="auto"
+      ></video>
+
+      <div class="playvideo">
+        <button id="playbutton" class="playbutton" type="button"></button>  
+      </div>
+
+    </main>
+  </body>
 </html>
