@@ -7,24 +7,30 @@
     <link rel="stylesheet" href="stylesheets/intropage.css" />
     <script src="interactions/interactions.js" defer></script>
   </head>
-  <body class="landing"> 
+  <body class="landing">
+
     <main id="main" class="intro">
+
       <video
         id="loop"
-        class="intro"
+        class="introvideo"
         src="assets/static intro.mp4"
         autoplay
         loop
       ></video>
+
       <video
         id="playvideo"
-        class="intro"
+        class="introvideo"
         src="assets/intro animation.mp4"
         preload="auto"
+        playsinline
       ></video>
 
       <div class="playvideo">
-        <button id="playbutton" class="playbutton" type="button"></button>  
+        <button id="playbutton" class="playbutton" type="button" 
+        <img src="assets/play button.png" alt="a triangle button">
+        </button>
       </div>
 
     </main>
