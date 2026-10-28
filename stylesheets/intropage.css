@@ -1,5 +1,28 @@
+html,
+body{
+    height: 100%;
+}
+
 body.landing{
     margin: 0;
     overflow: hidden;
-    background: FFFDEA;
+   background: #FFFDEA;
+}
+
+.intro{
+    position:relative;
+    width: 100%;
+    height: 100vh;
+}
+
+.introvideo{
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+#playvideo{
+    opacity: 0;
 }
