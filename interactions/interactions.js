@@ -1,7 +1,7 @@
 const navLinks = [
     {name: "Home", href:"home.html", icon:"home.png"},
     {name: "Movies", href:"movies.html", icon:"movies.png"},
-    {name: "Shows", href:"shows.html", icon:"shows.png"},
+    {name: "Shows", href:"shows.html", icon:"tv shows.png"},
     {name:"Directors", href:"directors.html", icon:"directors.png"},
     {name:"Credits", href:"credits.html", icon:"credits.png"}
     ];
