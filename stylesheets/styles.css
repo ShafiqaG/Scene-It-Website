@@ -1,0 +1,41 @@
+.header{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 1rem 5%;
+}
+
+.main-nav ul{
+  display: flex;
+  gap: 1.5rem;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.main-nav a[aria-current="page"]{
+  font-weight: bold;
+  text-decoration: underline;
+}
+
+.footer{
+  padding: 1rem 5%;
+  text-align: center;
+}
+
+.next{
+  position: absolute;
+  left: -9999px;
+}
+
+.next:focus{
+  left: 1rem;
+  top: 1rem;
+}
+
+.logo img{
+  display: block;
+  height: 3rem;  
+  width: auto;
+}
