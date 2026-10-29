@@ -39,6 +39,15 @@ const navLinks = [
         footer.innerHTML = '<p>Created using the TMDB API.</p>';
     }
 
+    function setupHeaderScroll(){
+        const header = document.getElementById("header")
+        if (!header) return;
+
+        window.addEventListener("scroll", function(){
+            header.classList.toggle("compact", window.scrollY > 40);
+        })
+    }
+
     buildHeader();
     buildFooter();
 
@@ -47,7 +56,8 @@ const loopVideo = document.getElementById("loop");
 const playVideo = document.getElementById("playvideo");
 const playButton = document. getElementById("playbutton");
 
-playButton.addEventListener("click", async () =>{
+if(playButton){
+    playButton.addEventListener("click", async () =>{
     playButton.disabled = true;
 
     loopVideo.pause();
@@ -62,11 +72,12 @@ playButton.addEventListener("click", async () =>{
        await playVideo.play();
 
        playVideo. addEventListener("ended", () =>{
-        window.location.href = "../pages/home.html";
+        window.location.href = "pages/home.html";
        },
     {once:true});
 
     } catch(error){
-        console.error("Something went wrog, this video cannot play")
+        console.error("Something went wrong, this video cannot play")
     }
 });
+}

@@ -1,4 +1,67 @@
-@import url('https://fonts.googleapis.com/css2?family=Aref+Ruqaa&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Aref+Ruqaa:wght@400;700&family=Asset&family=Diplomata&family=Instrument+Serif:ital@0;1&display=swap');
+
+:root{
+  --background: #FFFDD2;
+  --heading-text: #A84848;
+  --content-text: #565656;
+  --card-background: #F0E4A8;
+  --accent: #B8A858;
+  --button: #8B1A1A;
+  --button-text: #FFFFD2;
+  --landing-background: #FFFDEA;
+}
+
+[data-theme="dark"]{
+  --background: #352A2A;
+  --heading-text: #A09560;
+  --content-text: #AFAD8C;
+  --card-background: #452B2B;
+  --accent: #59573C;
+  --button: #B02A2A;
+  --button-text: #FFFFD2;
+  --landing-background: #4E2727;
+}
+
+body{
+  background: var(--background);
+  color: var(--content-text);
+
+}
+
+h1, h2, h3{
+  color: var(--heading-text);
+}
+
+body{
+  font-family: var(--font-body);
+  font-size: 1.25rem;
+  line-height: 1.5;
+}
+
+h1{
+  font-family: var(--font-h1);
+  font-weight: 400;
+  font-size: clamp(1.75rem, 6vw, 4rem);
+  line-height: 1.1;
+  overflow-wrap: break-word;
+}
+
+h2, h3{
+  font-family: var(--font-h2);
+  font-weight: 400;
+  font-size: clamp(1.5rem, 4vw, 3rem);
+  line-height: 1.1;
+}
+
+.main-nav a,
+.caption{
+  font-family: var(--font-caption);
+}
+
+button,
+input{
+  font-family: inherit;
+}
 
 .header{
   position: sticky;
@@ -52,7 +115,8 @@
     object-fit: contain;
 }
 
-.main-nav a :hover{
+.main-nav a:hover,
+.main-nav a:focus-visible{
     transform: translateY(-2px);
 }
 
