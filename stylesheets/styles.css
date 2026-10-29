@@ -1,9 +1,30 @@
+@import url('https://fonts.googleapis.com/css2?family=Aref+Ruqaa&display=swap');
+
 .header{
+  position: sticky;
+  top: 0;
+  z-index: 1000;
   display: flex;
   align-items: center;
   justify-content: space-between;
   gap: 1rem;
   padding: 1rem 5%;
+  transition: padding 0.3s ease, box-shadow 0.3s ease;
+}
+
+.header.compact{
+    padding-top: 0.4rem;
+    padding-bottom: 0.4rem;
+    box-shadow: 0 3px 12px #00000015;
+}
+
+.header.compact .logo img{
+    height: 2.25rem;
+}
+
+.header.compact .main-nav a img{
+    width: 1.5rem;
+    height: 1.5rem;
 }
 
 .main-nav ul{
@@ -12,6 +33,27 @@
   list-style: none;
   margin: 0;
   padding: 0;
+}
+
+.main-nav a{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.25rem;
+
+    font-family:"Aref Ruqaa", serif;
+    font-size: 0.75rem;
+    text-decoration: none;
+}
+
+.main-nav a img{
+    width: 2rem;
+    height: 2rem;
+    object-fit: contain;
+}
+
+.main-nav a :hover{
+    transform: translateY(-2px);
 }
 
 .main-nav a[aria-current="page"]{
@@ -39,3 +81,4 @@
   height: 3rem;  
   width: auto;
 }
+

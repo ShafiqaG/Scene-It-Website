@@ -1,10 +1,9 @@
 const navLinks = [
-    {name: "Home", href:"home.html"},
-    {name: "Movies", href:"movies.html"},
-    {name: "Shows", href:"shows.html"},
-    {name:"Profiles", href:"profiles.html"},
-    {name:"Directors", href:"directors.html"},
-    {name:"Credits", href:"credits.html"}
+    {name: "Home", href:"home.html", icon:"home.png"},
+    {name: "Movies", href:"movies.html", icon:"movies.png"},
+    {name: "Shows", href:"shows.html", icon:"shows.png"},
+    {name:"Directors", href:"directors.html", icon:"directors.png"},
+    {name:"Credits", href:"credits.html", icon:"credits.png"}
     ];
 
     function buildHeader(){
@@ -15,7 +14,10 @@ const navLinks = [
 
         const links = navLinks.map(function(link){
             const current = link.href === currentPage? 'aria-current = "page"': "";
-            return `<li><a href = "${link.href}"${current}>${link.name}</a></li>`;
+            return `<li><a href = "${link.href}"${current}>
+            <img src = "../assets/${link.icon}" alt = "image of logo">
+            <span>${link.name}</span>
+            </a></li>`;
             }).join("");
 
         header.innerHTML = `
@@ -25,7 +27,9 @@ const navLinks = [
 
         <nav class="main-nav" aria-label="Main navigation">
             <ul>${links}</ul>
-         </nav>`;
+         </nav>`; 
+
+         
     }
  
     function buildFooter(){
