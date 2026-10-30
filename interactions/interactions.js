@@ -1,3 +1,41 @@
+function getSavedTheme(){
+  try{
+    return localStorage.getItem("theme");
+  } catch (error) {
+    return null;
+  }
+}
+
+function applyTheme(theme){
+  document.documentElement.setAttribute("datatheme", theme);
+}
+
+applyTheme(getSavedTheme()||"light");
+
+function setupThemeToggle(){
+  const button = document.getElementById("themetoggle");
+  if (!button) return;
+
+  function updateLabel(){
+    const isDark = document.documentElement.getAttribute("datatheme") === "dark";
+    button.setAttribute("aria-label", isDark ? "Switch to light mode" : "Switch to dark mode");
+  }
+
+  updateLabel();
+
+  button.addEventListener("click", function(){
+    const isDark = document.documentElement.getAttribute("datatheme") === "dark";
+    const next = isDark ? "light" : "dark";
+    applyTheme(next);
+    try {
+      localStorage.setItem("theme", next);
+    } catch (error){
+    }
+    updateLabel();
+  });
+}
+
+
 const navLinks = [
     {name: "Home", href:"home.html", icon:"home.png"},
     {name: "Movies", href:"movies.html", icon:"movies.png"},
@@ -20,16 +58,6 @@ const navLinks = [
             </a></li>`;
             }).join("");
 
-        header.innerHTML = `
-        <a class="logo" href="home.html">
-        <img src = "../assets/website logo.png" alt = "Scene It! logo">
-        </a>
-
-        <nav class="main-nav" aria-label="Main navigation">
-            <ul>${links}</ul>
-         </nav>`; 
-
-         
     }
  
     function buildFooter(){
@@ -48,8 +76,34 @@ const navLinks = [
         })
     }
 
+    buildHeader(
+          header.innerHTML = `
+    <a class="logo" href="home.html">
+      <img src="../assets/website logo.png" alt="Scene It! home">
+    </a>
+
+    <nav class="main-nav" aria-label="Main navigation">
+      <ul>${links}</ul>
+    </nav>
+
+    <form class="search" role="search" action="search.html" method="get">
+      <label for="search-input" class="visually-hidden">Search movies, shows and directors</label>
+      <input id="search-input" type="search" name="query" placeholder="Search" required>
+      <button type="submit" aria-label="Search">
+        <img src="../assets/search.png" alt="">
+      </button>
+    </form>
+
+    <button class="theme-toggle" id="theme-toggle" type="button" aria-label="Switch to dark mode">
+      <img src="../assets/theme.png" alt="">
+    </button>`
+
+
+    );
     buildHeader();
     buildFooter();
+    setupHeaderScroll();
+    setupThemeToggle();
 
 
 const loopVideo = document.getElementById("loop");

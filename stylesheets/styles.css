@@ -2,7 +2,7 @@
 
 :root{
   --background: #FFFDD2;
-  --heading-text: #A84848;
+  --heading-text: #363232;
   --content-text: #565656;
   --card-background: #F0E4A8;
   --accent: #B8A858;
@@ -64,12 +64,12 @@ input{
 }
 
 .header{
+  background: var(--background);  
   position: sticky;
   top: 0;
   z-index: 1000;
   display: flex;
   align-items: center;
-  justify-content: space-between;
   gap: 1rem;
   padding: 1rem 5%;
   transition: padding 0.3s ease, box-shadow 0.3s ease;
@@ -146,3 +146,64 @@ input{
   width: auto;
 }
 
+.visually-hidden{
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+}
+
+.search{
+  display: flex;
+  align-items: center;
+  margin-left: auto;
+  background: var(--card-background);
+  border-radius: 999px;
+  padding: 0.25rem 0.75rem;
+}
+
+.search input{
+  width: 10rem;
+  min-width: 0;
+  border: 0;
+  background: transparent;
+  color: var(--content-text);
+  font-size: 1rem;
+}
+
+.search input:focus{
+  outline: none;
+}
+
+.search:focus-within{
+  outline: 3px solid var(--button);
+  outline-offset: 3px;
+}
+
+.search button,
+.theme-toggle{
+  border: 0;
+  background: transparent;
+  cursor: pointer;
+  padding: 0.25rem;
+}
+
+.search button img,
+.theme-toggle img{
+  display: block;
+  width: 1.5rem;
+  height: 1.5rem;
+}
+
+
+body{
+  transition: background-color 0.4s ease, color 0.4s ease;
+}
+
+@media (prefers-reduced-motion: reduce){
+  body {
+    transition: none;
+  }
+}
