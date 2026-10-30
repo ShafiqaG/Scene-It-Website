@@ -13,6 +13,9 @@
   --button: #8B1A1A;
   --button-text: #FFFFD2;
   --landing-background: #FFFDEA;
+  --nav-icon-size: 3.25rem;
+  --nav-icon-size-compact: 2rem;
+  --nav-label-size: 0.95rem;
 }
 
 [data-theme="dark"]{
@@ -29,17 +32,14 @@
 body{
   background: var(--background);
   color: var(--content-text);
-
+  font-family: var(--font-body);
+  font-size: 1.25rem;
+  line-height: 1.25;
+  transition: background-color 0.4s ease, color 0.4s ease;
 }
 
 h1, h2, h3{
   color: var(--heading-text);
-}
-
-body{
-  font-family: var(--font-body);
-  font-size: 1.25rem;
-  line-height: 1.5;
 }
 
 h1{
@@ -48,7 +48,7 @@ h1{
   font-size: clamp(1.75rem, 6vw, 4rem);
   line-height: 1.1;
   overflow-wrap: break-word;
-  padding-left: 37%;
+  text-align: center;
 }
 
 h2, h3{
@@ -58,7 +58,6 @@ h2, h3{
   line-height: 1.1;
 }
 
-.main-nav a,
 .caption{
   font-family: var(--font-caption);
 }
@@ -66,6 +65,19 @@ h2, h3{
 button,
 input{
   font-family: inherit;
+}
+
+.main{
+    max-width: 70rem;
+    margin: 0 auto;
+    padding: 1.5rem 5%;
+}
+
+main>p{
+    max-width: 60ch;
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
 }
 
 .header{
@@ -76,16 +88,14 @@ input{
   display: flex;
   align-items: center;
   gap: 1rem;
-  padding: 1rem 5%;
-  transition: padding 0.3s ease, box-shadow 0.3s ease;
+  padding: 0 5%;
+  transition: height 0.3s ease, box-shadow 0.3s ease;
   height: 5rem;
   box-sizing: border-box;
-  overflow: visible;
 }
 
 .header.compact{
-    padding-top: 0.4rem;
-    padding-bottom: 0.4rem;
+    height: 4rem;
     box-shadow: 0 3px 12px #00000015;
 }
 
@@ -94,13 +104,13 @@ input{
 }
 
 .header.compact .main-nav a img{
-    width: 1.5rem;
-    height: 1.5rem;
+    width: var(--nav-icon-size-compact);
+    height: var(--nav-icon-size-compact);
 }
 
 .main-nav ul{
   display: flex;
-  gap: 1.5rem;
+  gap: 1rem;
   list-style: none;
   margin: 0;
   padding: 0;
@@ -110,22 +120,30 @@ input{
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 0.25rem;
-
-    font-family:"Aref Ruqaa", serif;
+    gap: 0.15rem;
+    padding: 0.25rem 0.5rem;
+    line-height: 1;
+    font-family: var(--font-caption);
     font-size: 0.75rem;
+    color: var(--content-text);
     text-decoration: none;
+    transition: transform 0.2s ease;
 }
 
 .main-nav a img{
-    width: 10rem;
-    height: 5rem;
+    width: var(--nav-icon-size);
+    height:var(--nav-icon-size);
     object-fit: contain;
+    transition: width 0.3s ease, height 0.3s ease;
 }
 
-.main-nav a:hover,
-.main-nav a:focus-visible{
+.main-nav a:hover{
     transform: translateY(-2px);
+}
+
+.main-nav a:focus-visible{
+    outline: 3px solid var(--button);
+    outline-offset: 4px;
 }
 
 .main-nav a[aria-current="page"]{
@@ -201,17 +219,93 @@ input{
 .search button img,
 .theme-toggle img{
   display: block;
-  width: 1.5rem;
-  height: 1.5rem;
+  width: 3rem;
+  height: 2rem;
 }
 
-
-body{
-  transition: background-color 0.4s ease, color 0.4s ease;
+.menu-button{
+  display: none;
+  flex-direction: column;
+  justify-content: center;
+  gap: 5px;
+  width: 2.75rem;
+  height: 2.75rem;
+  padding: 0.6rem;
+  border: 0;
+  background: transparent;
+  cursor: pointer;
 }
+
+.menu-button span{
+  display: block;
+  height: 3px;
+  border-radius: 2px;
+  background: var(--content-text);
+}
+
+.menu-button:focus-visible{
+  outline: 3px solid var(--button);
+  outline-offset: 2px;
+}
+
+@media (max-width: 48rem){
+  .header{
+    flex-wrap: wrap;
+    gap: 0.75rem;
+    height:auto;
+    min-height: 4rem;
+    padding: 0.5rem 5%;
+  }
+
+  .main-nav{
+    margin: 0;
+  }
+
+  .menu-button{
+    display: flex;
+  }
+
+  .main-nav{
+    display: none;
+    order: 10;
+    width: 100%;
+  }
+
+  .main-nav.open{
+    display: block;
+  }
+
+  .main-nav ul{
+    flex-direction: column;
+    gap: 0.25rem;
+  }
+
+  .main-nav a{
+    flex-direction: row;
+    gap: 0.75rem;
+    padding: 0.6rem 0;
+    font-size: 1.1rem;
+  }
+
+  .search{
+    flex: 1;
+  }
+
+  .search input{
+    width: 100%;
+  }
+}
+
 
 @media (prefers-reduced-motion: reduce){
-  body {
+  body,
+  .header,
+    .main-nav a{
     transition: none;
   }
+
+  .main-nav a:hover,
+  .main-nav a:focus-visible{
+    transform: none;
+  } 
 }

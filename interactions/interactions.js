@@ -37,11 +37,11 @@ function setupThemeToggle(){
 
 
 const navLinks = [
-    {name: "Home", href:"home.html", icon:"home.png"},
-    {name: "Movies", href:"movies.html", icon:"movies.png"},
-    {name: "Shows", href:"shows.html", icon:"tv shows.png"},
-    {name:"Directors", href:"directors.html", icon:"directors.png"},
-    {name:"Credits", href:"credits.html", icon:"credits.png"}
+    {name: "Home", href:"home.html", icon:"home.svg"},
+    {name: "Movies", href:"movies.html", icon:"movies.svg"},
+    {name: "Shows", href:"shows.html", icon:"tv shows.svg"},
+    {name:"Directors", href:"directors.html", icon:"directors.svg"},
+    {name:"Credits", href:"credits.html", icon:"credits.svg"}
     ];
 
     function buildHeader(){
@@ -72,12 +72,12 @@ const navLinks = [
       <label for="search-input" class="visually-hidden">Search movies, shows and directors</label>
       <input id="search-input" type="search" name="query" placeholder="Search" required>
       <button type="submit" aria-label="Search">
-        <img src="../assets/search icon.png" alt="search icon">
+        <img src="../assets/search icon.svg" alt="search icon">
       </button>
     </form>
 
     <button class="theme-toggle" id="theme-toggle" type="button" aria-label="Switch to dark mode">
-      <img src="../assets/hamburger menu.png" alt="menu icon">
+      <img src="../assets/theme.svg" alt="menu icon">
     </button>`;
 
 }
