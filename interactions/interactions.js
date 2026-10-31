@@ -105,12 +105,12 @@ const navLinks = [
     setupThemeToggle();
 
 async function loadPosterCard(cardName, endpoint, titleField){
-  const media = document.querySelector('[data-card="${cardName}"] .card-media');
+  const media = document.querySelector(`[data-card="${cardName}"] .card-media`);
   if (!media) return;
 
-  const data = await tmdbFetch("endpoint");
+  const data = await tmdbFetch(endpoint);
   const item = data.results.find(function (result) {return result.poster_path;});
-  if (!movie) return;
+  if (!item) return;
 
   const img = document.createElement("img");
   img.src = imageUrl(item.poster_path, "w500");
