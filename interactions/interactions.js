@@ -104,21 +104,22 @@ const navLinks = [
     setupHeaderScroll();
     setupThemeToggle();
 
-async function loadMovieCard(){
-  const media = document.querySelector('[data-card="movies"] .card-media');
+async function loadPosterCard(cardName, endpoint, titleField){
+  const media = document.querySelector('[data-card="${cardName}"] .card-media');
   if (!media) return;
 
-  const data = await tmdbFetch("/trending/movie/week");
-  const movie = data.results.find(function (item) { return item.poster_path; });
+  const data = await tmdbFetch("endpoint");
+  const item = data.results.find(function (result) {return result.poster_path;});
   if (!movie) return;
 
   const img = document.createElement("img");
-  img.src = imageUrl(movie.poster_path, "w500");
-  img.alt = "Poster for " + movie.title;
+  img.src = imageUrl(item.poster_path, "w500");
+  img.alt = "Poster for " + item[titleField];
   media.appendChild(img);
 }
 
-loadMovieCard();
+loadPosterCard("movies", "/trending/movie/week", "title");
+loadPosterCard("shows", "/trending/tv/week", "name");
 
 const loopVideo = document.getElementById("loop");
 const playVideo = document.getElementById("playvideo");
