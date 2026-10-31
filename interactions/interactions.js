@@ -104,6 +104,21 @@ const navLinks = [
     setupHeaderScroll();
     setupThemeToggle();
 
+async function loadMovieCard(){
+  const media = document.querySelector('[data-card="movies"] .card-media');
+  if (!media) return;
+
+  const data = await tmdbFetch("/trending/movie/week");
+  const movie = data.results.find(function (item) { return item.poster_path; });
+  if (!movie) return;
+
+  const img = document.createElement("img");
+  img.src = imageUrl(movie.poster_path, "w500");
+  img.alt = "Poster for " + movie.title;
+  media.appendChild(img);
+}
+
+loadMovieCard();
 
 const loopVideo = document.getElementById("loop");
 const playVideo = document.getElementById("playvideo");
