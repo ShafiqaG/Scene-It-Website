@@ -58,6 +58,9 @@ h2, h3{
   line-height: 1.1;
 }
 
+h2{
+    padding-top: 10%;
+}
 .caption{
   font-family: var(--font-caption);
 }
@@ -312,9 +315,9 @@ main>p{
 
 .categories{
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: 2rem;
-  max-width: 60rem;
+  max-width: 65rem;
   margin: 2rem auto 0;
 }
 
@@ -338,17 +341,22 @@ main>p{
 .cardlink h2{
   margin: 0;
   font-size: clamp(1.5rem, 3vw, 2.25rem);
+  overflow: anywhere;
 }
 
 .cardlink .caption{
   margin: 0;
   font-size: 1rem;
+  min-height: 3rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .card-media{
   box-sizing: border-box;
   width: 100%;
-  max-width: 16rem;
+  max-width: 20rem;
   aspect-ratio: 1;
   margin-top: 0.5rem;
   overflow: hidden;

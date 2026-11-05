@@ -115,11 +115,27 @@ async function loadPosterCard(cardName, endpoint, titleField){
   const img = document.createElement("img");
   img.src = imageUrl(item.poster_path, "w500");
   img.alt = "Poster for " + item[titleField];
+  media.appendChild(img);}
+
+  async function loadDirectorCard(){
+  const media = document.querySelector('[data-card="directors"] .card-media');
+  if (!media) return;
+
+  const id = featuredDirectorIDS[Math.floor(Math.random() * featuredDirectorIDS.length)];
+  const person = await tmdbFetch("/person/" + id);
+  if (!person.profile_path) return;
+
+  const img = document.createElement("img");
+  img.src = imageUrl(person.profile_path, "h632");
+  img.alt = "Photo of " + person.name;
   media.appendChild(img);
 }
 
+
 loadPosterCard("movies", "/trending/movie/week", "title");
 loadPosterCard("shows", "/trending/tv/week", "name");
+loadDirectorCard();
+
 
 const loopVideo = document.getElementById("loop");
 const playVideo = document.getElementById("playvideo");
