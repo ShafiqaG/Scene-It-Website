@@ -1,4 +1,6 @@
 const movieCategories =[
+  {title: "Popular",  endpoint: "/movie/popular", params: {} },
+  {title: "Trending", endpoint: "/trending/movie/week", params: {} },
   {title: "Action", endpoint: "/discover/movie", params: {with_genres: 28, sort_by: "popularity.desc"}},
   {title: "Adventure", endpoint: "/discover/movie", params: {with_genres: 12, sort_by: "popularity.desc"}},
   {title: "Animation", endpoint: "/discover/movie", params: {with_genres: 16, sort_by: "popularity.desc"}},
