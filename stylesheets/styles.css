@@ -16,6 +16,7 @@
   --nav-icon-size: 3.25rem;
   --nav-icon-size-compact: 2rem;
   --nav-label-size: 0.95rem;
+  --card-title-text: #363232;
 }
 
 [data-theme="dark"]{
@@ -27,6 +28,7 @@
   --button: #B02A2A;
   --button-text: #FFFFD2;
   --landing-background: #4E2727;
+  --card-title-text: #FFFFD2;
 }
 
 body{
@@ -315,7 +317,6 @@ main>p{
 
 .categories{
   display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: 2rem;
   max-width: 65rem;
   margin: 2rem auto 0;
@@ -370,4 +371,100 @@ main>p{
   width: 100%;
   height: 100%;
   object-fit: cover;
+}
+
+.category h2{
+  margin: 2rem 0 1rem;
+  font-size: clamp(1.5rem, 3vw, 2rem);
+}
+
+.moviegrid{
+  display: grid;
+  grid-auto-flow: column;
+  grid-auto-columns: calc((100% - 3*1.5rem) / 4);
+  gap: 1.5rem;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  padding-bottom: 0.75rem;
+}
+
+.moviecard{
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  box-sizing: border-box;
+  padding: 0.5rem;
+  border-radius: 1rem;
+  background: var(--accent);
+  scroll-snap-align: start;
+}
+
+.moviecard img{
+  display: block;
+  width: 100%;
+  aspect-ratio: 2 / 3;
+  object-fit: cover;
+  border-radius: 0.6rem;
+}
+
+.moviecard h3{
+  margin: 0;
+  min-height: 2.4em;
+  padding: 0 0.25rem 0.25rem;
+  font-size: 1rem;
+  line-height: 1.2;
+  text-align: center;
+  color: var(--card-title-text);
+  overflow: hidden;
+}
+
+@media (max-width: 48rem){
+  .moviegrid {
+    grid-auto-columns: calc((100% - 1.5rem)/2);
+  }
+}
+
+.rowwrap{
+  position: relative;
+}
+
+.moviegrid{
+  scrollbar-width: none;
+}
+
+
+.arrow{
+  position: absolute;
+  top: 40%;
+  transform: translateY(-50%);
+  z-index: 2;
+  display: grid;
+  place-items: center;
+  box-sizing: border-box;
+  width: 3.5rem;
+  height: 3.5rem;
+  padding: 0.6rem;
+  border: 0;
+  border-radius: 50%;
+  background: var(--background);
+  cursor: pointer;
+}
+
+.arrow img{
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+.arrow-next img{
+  transform: scaleX(-1);
+}
+
+.arrow-previous{ left: 0.5rem;}
+.arrow-next{ right: 0.5rem;}
+
+.arrow:focus-visible{
+  outline: 3px solid var(--heading-text);
+  outline-offset: 3px;
 }

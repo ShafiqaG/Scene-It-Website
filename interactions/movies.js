@@ -49,13 +49,66 @@ async function fetchMovies(category){
   }
 }
 
-function displayMovies(movies){
-  const container = document.querySelector("#moviecontainer");
+  
+  function makeArrow(direction, grid){
+  const button = document.createElement("button");
+  button.type = "button";
+  button.className = "arrow arrow-" + direction;
+  const icon = document.createElement("img");
+  icon.src = "../assets/arrow.svg";
+  icon.alt = "";
+  button.append(icon);
 
+  const label = direction === "next" ? "Next" : "Previous";
+  button.setAttribute("aria-label", label + " movies");
+  button.title = label;
+
+  button.addEventListener("click", function(){
+    const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    const amount = grid.clientWidth * (direction === "next" ? 1 : -1);
+    grid.scrollBy({ left: amount, behavior: reduce ? "auto" : "smooth" });
+  });
+
+  return button;
+}
+
+function createRow(category){
+  const section = document.createElement("section");
+  section.className = "category";
+
+  const heading = document.createElement("h2");
+  heading.textContent = category.title;
+
+  const wrap = document.createElement("div");
+  wrap.className = "rowwrap";
+
+  const grid = document.createElement("div");
+  grid.className = "moviegrid";
+
+  wrap.append(makeArrow("previous", grid), grid, makeArrow("next", grid));
+  section.append(heading, wrap);
+  document.querySelector("#rows").append(section);
+
+  return grid;
+}
+
+function displayMovies(movies, container){
   container.innerHTML = "";
 
-  movies.forEach(movie =>{
+  movies.forEach(movie => {
     container.append(makeMovieCard(movie));
   });
 }
-  fetchMovies(movieCategories[0]);
+
+async function fetchMovies(category){
+  const row = createRow(category);
+
+  try {
+    const data = await tmdbFetch(category.endpoint, category.params);
+    displayMovies(data.results, row);
+  } catch (error) {
+    console.error("Error fetching movies:", error);
+  }
+}
+
+movieCategories.forEach(fetchMovies);
