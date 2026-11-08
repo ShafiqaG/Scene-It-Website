@@ -385,7 +385,8 @@ main>p{
   gap: 1.5rem;
   overflow-x: auto;
   scroll-snap-type: x mandatory;
-  padding-bottom: 0.75rem;
+  padding: 1rem 0.75rem 1.25rem;
+  scrollbar-width: none;
 }
 
 .moviecard{
@@ -397,10 +398,11 @@ main>p{
   border-radius: 1rem;
   background: var(--accent);
   scroll-snap-align: start;
-  transition: transform 0.3 ease, box-shadow 0.3 ease;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  overflow: hidden;
 }
 
-.moviecard :hover{
+.moviecard:hover{
     transform: scale(1.05);
     box-shadow: 0 0 10px var(--accent), 0 0 20px var(--accent), 0 0 35px var(--accent);
 }
