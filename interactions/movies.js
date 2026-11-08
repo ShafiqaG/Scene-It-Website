@@ -56,7 +56,6 @@ async function fetchMovies(category){
   button.className = "arrow arrow-" + direction;
   const icon = document.createElement("img");
   icon.src = "../assets/arrow.svg";
-  icon.alt = "";
   button.append(icon);
 
   const label = direction === "next" ? "Next" : "Previous";
