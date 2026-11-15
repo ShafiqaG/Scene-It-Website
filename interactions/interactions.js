@@ -136,6 +136,26 @@ loadPosterCard("movies", "/trending/movie/week", "title");
 loadPosterCard("shows", "/trending/tv/week", "name");
 loadDirectorCard();
 
+function makeArrow(direction, grid, what = "movies"){
+  const button = document.createElement("button");
+  button.type = "button";
+  button.className = "arrow arrow-" + direction;
+  const icon = document.createElement("img");
+  icon.src = "../assets/arrow.svg";
+  button.append(icon);
+
+  const label = direction === "next" ? "Next" : "Previous";
+  button.setAttribute("aria-label", label + " " + what);
+  button.title = label;
+
+  button.addEventListener("click", function(){
+    const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    const amount = grid.clientWidth * (direction === "next" ? 1 : -1);
+    grid.scrollBy({ left: amount, behavior: reduce ? "auto" : "smooth" });
+  });
+
+  return button;
+}
 
 const loopVideo = document.getElementById("loop");
 const playVideo = document.getElementById("playvideo");

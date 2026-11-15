@@ -17,8 +17,9 @@ const movieCategories =[
 ];
   
 function makeMovieCard(movie){
-  const card = document.createElement("article");
+  const card = document.createElement("a");
   card.className = "moviecard";
+  card.href = `profiles.html?type=movie&id=${movie.id}`;
 
   const img = document.createElement("img");
   img.src = movie.poster_path
@@ -33,42 +34,6 @@ function makeMovieCard(movie){
   card.append(img, title);
 
   return card;
-}
-
-async function fetchMovies(category){
-  try {
-    const data = await tmdbFetch(
-      category.endpoint,
-      category.params
-    );
-
-    displayMovies(data.results);
-
-  } catch (error) {
-    console.error("Error fetching movies:", error);
-  }
-}
-
-  
-  function makeArrow(direction, grid){
-  const button = document.createElement("button");
-  button.type = "button";
-  button.className = "arrow arrow-" + direction;
-  const icon = document.createElement("img");
-  icon.src = "../assets/arrow.svg";
-  button.append(icon);
-
-  const label = direction === "next" ? "Next" : "Previous";
-  button.setAttribute("aria-label", label + " movies");
-  button.title = label;
-
-  button.addEventListener("click", function(){
-    const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-    const amount = grid.clientWidth * (direction === "next" ? 1 : -1);
-    grid.scrollBy({ left: amount, behavior: reduce ? "auto" : "smooth" });
-  });
-
-  return button;
 }
 
 function createRow(category){
