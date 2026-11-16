@@ -76,7 +76,7 @@ function animateFilmstrip(filmstrip, index){
       x: 0,
       opacity: 1,
       scale:1,
-      duration: 4,
+      duration: 3,
       ease: "power3.out",
 
       scrollTrigger:{
@@ -86,7 +86,6 @@ function animateFilmstrip(filmstrip, index){
         scrub: 2.5
       }
     }
-    
   );
 
    gsap.fromTo(heading,
@@ -98,7 +97,7 @@ function animateFilmstrip(filmstrip, index){
       x: 0,
       opacity: 1,
       ease: "none",
-      scrollTrigger:{
+      scrollTrigger: {
         trigger: filmstrip,
         start: "top 85%",
         end: "top 45%",

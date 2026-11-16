@@ -101,7 +101,7 @@ function animateFilmstrip(filmstrip, index){
       x: 0,
       opacity: 1,
       ease: "none",
-      scrollTrigger:{
+      scrollTrigger: {
         trigger: filmstrip,
         start: "top 85%",
         end: "top 45%",
