@@ -3,13 +3,6 @@ const params = new URLSearchParams(window.location.search);
 const type = params.get("type");
 const id = params.get("id");
 
-function makeElement(tag, className, text){
-  const element = document.createElement(tag);
-  if (className) element.className = className;
-  if (text) element.textContent = text;
-  return element;
-}
-
 function makeSlides(data){
   const slides =[];
   const videos = data.videos ? data.videos.results :[];

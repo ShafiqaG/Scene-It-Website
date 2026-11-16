@@ -815,3 +815,48 @@ main>p{
     transform: none;
   }
 }
+
+.credits-thanks,
+.credits-signoff{
+  text-align: center;
+  font-family: var(--font-h2);
+  font-size: 1.5rem;
+  color: var(--heading-text);
+}
+
+.credits-list{
+  display: grid;
+  grid-template-columns: max-content 1fr;
+  gap: 1rem 2.5rem;
+  max-width: 50rem;
+  margin: 2rem auto;
+}
+
+.credits-list dt{
+  font-family: var(--font-h2);
+  color: var(--heading-text);
+}
+
+.credits-list dd{
+  margin: 0;
+}
+
+.credits-tmdb{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+  margin: 3rem auto;
+  text-align: center;
+}
+
+.credits-tmdb img{
+  display: block;
+  height: 2rem;
+  width: auto;
+}
+
+.credits-tmdb p{
+  margin: 0;
+  font-size: 1rem;
+}
