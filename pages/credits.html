@@ -6,6 +6,8 @@
     <title>Credits</title>
     <link rel="stylesheet" href="../stylesheets/styles.css">
     <script src="../interactions/interactions.js" defer></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js" defer></script>
+    <script src="../interactions/credits.js" defer></script>
 </head>
 <body>
     <a class="next" href="#main">Next page</a>
@@ -16,9 +18,13 @@
 
     <h1>CREDITS</h1>
 
-    <main id="main">
-  <h1>CREDITS</h1>
 
+  <div id="credits-controls" class="credits-controls" hidden>
+    <button id="credits-toggle" class="card-button" type="button">Pause</button>
+    <button id="credits-list" class="card-button" type="button">Show as list</button>
+  </div>
+
+</main>
   <p class="credits-thanks">Thanks for browsing!</p>
 
   <dl class="credits-list">
@@ -51,6 +57,11 @@
   </dl>
 
   <section class="credits-tmdb" aria-label="TMDB attribution">
+
+    <div id="credits-stage" class="credits-stage">
+    <div id="credits-roll" class="credits-roll"></div>
+  </div>
+
     <img src="../assets/The_Movie_Database_Logo_0.svg" alt="The Movie Database (TMDB) logo">
     <p>This product uses the TMDB API but is not certified by it.</p>
   </section>

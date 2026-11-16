@@ -8,6 +8,8 @@
     <script src="../interactions/config.js" defer></script>
     <script src="../interactions/api.js" defer></script>
     <script src="../interactions/interactions.js" defer></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.13.0/gsap.min.js" defer></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.13.0/ScrollTrigger.min.js" defer></script>
     <script src="../interactions/shows.js" defer></script>
 </head>
 <body>
@@ -17,10 +19,27 @@
 
     <main id="main">
 
-    <h1>SHOWS</h1>
-    <p>In the mood to binge? Or just want to find a good show with a few episodes? You're in the right place! Browse through different shows with varrying episode lenghs and durations.</p>
+<section class="movie-show-page-intro">
 
+    <h1>SHOWS</h1>
+    <div class="intro-filmstrip strip-top">
+        <div class="filmstrip-track">
+        <img src="../assets/filmstrip.svg" class="intro-filmstrip-svg"><img src="../assets/filmstrip.svg" class="intro-filmstrip-svg"> <img src="../assets/filmstrip.svg" class="intro-filmstrip-svg"> 
+        </div>
+    </div>
+
+    <p>In the mood to binge? Or just want to find a good show with a few episodes? You're in the right place! Browse through different shows with varrying episode lenghs and durations.</p>
+    <div class="intro-filmstrip strip-bottom">
+        <div class="filmstrip-track">
+        <img src="../assets/filmstrip.svg" class="intro-filmstrip-svg"><img src="../assets/filmstrip.svg" class="intro-filmstrip-svg"> <img src="../assets/filmstrip.svg" class="intro-filmstrip-svg"> 
+        </div>
+    </div>
+
+</section>
+
+   <div class="filmframes">
     <div id="rows"></div>
+   </div>
 
     </main>
 

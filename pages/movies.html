@@ -8,6 +8,8 @@
     <script src="../interactions/config.js" defer></script>
     <script src="../interactions/api.js" defer></script>
     <script src="../interactions/interactions.js" defer></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.13.0/gsap.min.js" defer></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.13.0/ScrollTrigger.min.js" defer></script> 
     <script src="../interactions/movies.js" defer></script>
 </head>
 <body>
@@ -17,11 +19,29 @@
 
     <main id="main">
 
-    <h1>MOVIES</h1>
-    <p>Welcome to the movies section, browse through new releases, popular, trending movies and so much more?</p>
+<section class="movie-show-page-intro">
 
+    <h1>MOVIES</h1>
+
+    <div class="intro-filmstrip strip-top">
+        <div class="filmstrip-track">
+       <img src="../assets/filmstrip.svg" class="intro-filmstrip-svg"> <img src="../assets/filmstrip.svg" class="intro-filmstrip-svg"> <img src="../assets/filmstrip.svg" class="intro-filmstrip-svg"> 
+        </div>
+    </div>
+
+    <p>Welcome to the movies section, browse through new releases, popular, trending movies and so much more?</p>
+    <div class="intro-filmstrip strip-bottom">
+        <div class="filmstrip-track">
+        <img src="../assets/filmstrip.svg" class="intro-filmstrip-svg"><img src="../assets/filmstrip.svg" class="intro-filmstrip-svg"> <img src="../assets/filmstrip.svg" class="intro-filmstrip-svg"> 
+        </div>
+    </div>    
+
+</section>
+
+<div class="filmframes">
     <div id="rows"></div>
-   
+</div>
+
     </main>
 
     <footer class="footer" id="footer"></footer>
