@@ -157,6 +157,13 @@ function makeArrow(direction, grid, what = "movies"){
   return button;
 }
 
+function makeElement(tag, className, text){
+  const element = document.createElement(tag);
+  if (className) element.className = className;
+  if (text) element.textContent = text;
+  return element;
+}
+
 const loopVideo = document.getElementById("loop");
 const playVideo = document.getElementById("playvideo");
 const playButton = document. getElementById("playbutton");

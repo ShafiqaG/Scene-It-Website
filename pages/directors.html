@@ -5,7 +5,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Directors</title>
     <link rel="stylesheet" href="../stylesheets/styles.css">
+    <script src="../interactions/config.js" defer></script>
+    <script src="../interactions/api.js" defer></script>
+    <script src="../interactions/directors.js" defer></script>
     <script src="../interactions/interactions.js" defer></script>
+    <script src="../interactions/directorpage.js" defer></script>
+    
+
 </head>
 <body>
     <a class="next" href="#main">Next page</a>
@@ -15,7 +21,10 @@
     <main id="main">
 
     <h1>DIRECTORS</h1>
-    <p>Want to know more about the brains behind your favourite shows and movies? look no further!</p>
+    <p>Meet some of the famous names behind the camera</p>
+
+    <div id="director-list" class="director-list"></div>
+    <button id="load-more" class="load-more" type="button">Load More</button>
 
     </main>
 

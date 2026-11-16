@@ -315,6 +315,8 @@ main>p{
   } 
 }
 
+
+
 .categories{
   display: grid;
   gap: 2rem;
@@ -377,6 +379,8 @@ main>p{
   margin: 2rem 0 1rem;
   font-size: clamp(1.5rem, 3vw, 2rem);
 }
+
+
 
 .moviegrid{
   display: grid;
@@ -449,6 +453,7 @@ main>p{
 }
 
 
+
 .arrow{
   position: absolute;
   top: 40%;
@@ -484,6 +489,8 @@ main>p{
   outline: 3px solid var(--heading-text);
   outline-offset: 3px;
 }
+
+
 
 #profile{
   max-width: 60rem;
@@ -551,4 +558,260 @@ main>p{
 .profile-summary p{
   margin: 0;
   max-width: 65ch;
+}
+
+
+
+.director-list{
+  display: flex;
+  flex-direction: column;
+  gap: 3rem;
+  margin-top: 2rem;
+}
+
+.director-row{
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+}
+
+.director-row:nth-child(even){
+  flex-direction: row-reverse;
+}
+
+.director-card{
+  flex: 0 0 18rem;
+}
+
+.filmography{
+  flex: 1;
+  min-width: 0;
+}
+
+.filmography h3{
+  margin: 0 0 0.75rem;
+  font-size: 1.5rem;
+}
+
+.film-list{
+  margin: 0;
+  padding-left: 1.25rem;
+  font-size: 1.1rem;
+  line-height: 1.7;
+}
+
+.film-list a{
+  color: var(--content-text);
+  text-underline-offset: 0.2em;
+}
+
+.film-list a:hover,
+.film-list a:focus-visible{
+  color: var(--heading-text);
+}
+
+@media (max-width: 48rem){
+  .director-row,
+  .director-row:nth-child(even) {
+    flex-direction: column;
+  }
+
+  .director-card{
+    flex: none;
+    width: min(100%, 18rem);
+  }
+
+  .filmography{
+    width: 100%;
+  }
+}
+
+.director-card{
+  height: 26rem;
+  perspective: 1200px;
+}
+
+.flip-inner{
+  position: relative;
+  width: 100%;
+  height: 100%;
+  transform-style: preserve-3d;
+  transition: transform 0.6s ease;
+}
+
+.director-card.flipped .flip-inner{
+  transform: rotateY(180deg);
+}
+
+.face{
+  position: absolute;
+  inset: 0;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  padding: 1rem;
+  border-radius: 1.5rem;
+  background: var(--accent);
+  color: var(--card-title-text);
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+}
+
+.front{
+  align-items: center;
+  border: 0;
+  font: inherit;
+  text-align: center;
+  cursor: pointer;
+  transition: box-shadow 0.25s ease;
+}
+
+.front:hover,
+.front:focus-visible{
+  box-shadow: 0 0 1.5rem var(--card-glow);
+}
+
+.front:focus-visible{
+  outline: 3px solid var(--heading-text);
+  outline-offset: 4px;
+}
+
+.front img{
+  flex: 1 1 auto;
+  min-height: 0;
+  width: 100%;
+  object-fit: cover;
+  border-radius: 1rem;
+}
+
+.director-name{
+  font-family: var(--font-h2);
+  font-size: 1.25rem;
+  line-height: 1.2;
+}
+
+.back{
+  transform: rotateY(180deg);
+  text-align: left;
+}
+
+.back h2{
+  margin: 0;
+  font-size: 1.25rem;
+  color: var(--card-title-text);
+}
+
+.facts,
+.bio{
+  margin: 0;
+  font-size: 1rem;
+}
+
+.bio{
+  min-height: 0;
+  overflow-y: auto;
+}
+
+.bio.is-clamped{
+  display: -webkit-box;
+  overflow: hidden;
+}
+
+.bio {
+  scrollbar-width: thin;
+  scrollbar-color: var(--button) transparent;
+}
+
+.bio::-webkit-scrollbar{
+  width: 0.5rem;
+}
+
+.bio::-webkit-scrollbar-track{
+  background: transparent;
+}
+
+.bio::-webkit-scrollbar-thumb{
+  background: var(--button);
+  border-radius: 999px;
+}
+
+.card-button{
+  align-self: flex-start;
+  padding: 0.4rem 0.9rem;
+  border: 0;
+  border-radius: 999px;
+  background: var(--button);
+  color: var(--button-text);
+  font-size: 1rem;
+  cursor: pointer;
+}
+
+.card-button:focus-visible{
+  outline: 3px solid var(--heading-text);
+  outline-offset: 3px;
+}
+
+.flip-back{
+  margin-top: auto;
+}
+
+@media (prefers-reduced-motion: reduce){
+  .flip-inner,
+  .front {
+    transition: none;
+  }
+}
+
+.load-more{
+  display: block;
+  margin: 2.5rem auto;
+  padding: 0.85rem 2.5rem;
+  border: 0.2rem solid var(--accent);
+  border-radius: 999px;
+  background: var(--button);
+  color: var(--button-text);
+  font-family: var(--font-h2);
+  font-weight: 400;
+  font-size: 1.15rem;
+  letter-spacing: 0.04em;
+  cursor: pointer;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.load-more:hover,
+.load-more:focus-visible{
+  transform: translateY(-2px);
+  box-shadow: 0 0 1.25rem var(--card-glow);
+}
+
+.load-more:active{
+  transform: translateY(0);
+}
+
+.load-more:focus-visible{
+  outline: 3px solid var(--heading-text);
+  outline-offset: 4px;
+}
+
+.load-more:disabled{
+  opacity: 0.6;
+  cursor: wait;
+  transform: none;
+  box-shadow: none;
+}
+
+.load-more[hidden]{
+  display: none;
+}
+
+@media (prefers-reduced-motion: reduce){
+  .load-more {
+    transition: none;
+  }
+
+  .load-more:hover,
+  .load-more:focus-visible{
+    transform: none;
+  }
 }
