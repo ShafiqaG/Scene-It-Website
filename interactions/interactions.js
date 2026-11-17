@@ -87,7 +87,15 @@ const navLinks = [
         const footer = document.getElementById("footer")
         if(!footer) return; 
         
-        footer.innerHTML = '<p>Created using the TMDB API.</p>';
+        footer.innerHTML = `
+    <div class="footer-bottom">
+    <img src="../assets/The_Movie_Database_Logo_0.svg" alt="The Movie Database (TMDB)"class="tmdb-logo">
+      <p>Movie and television data provided by TMDB.</p>
+      <p>This product uses the TMDB API but is not endorsed or certified by TMDB.</p>
+      <p>© 2026 Scene It!</p>
+      <h3 class="footer-end">THE END.</h3>
+    </div>
+  `;
     }
 
     function setupHeaderScroll(){

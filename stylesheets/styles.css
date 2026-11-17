@@ -25,7 +25,7 @@
   --content-text: #AFAD8C;
   --card-background: #452B2B;
   --accent: #59573C;
-  --button: #B02A2A;
+  --button: #3d1111;
   --button-text: #FFFFD2;
   --landing-background: #4E2727;
   --card-title-text: #FFFFD2;
@@ -384,7 +384,7 @@ main>p{
   display: grid; 
   grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: 2rem;
-  max-width: 65em;
+  max-width: 65rem;
   margin: 2rem auto 0;
 }
 
@@ -414,6 +414,9 @@ main>p{
   flex-direction: column;
   align-items: center;
   text-align: center;
+  box-sizing: border-box;
+  padding: 1.5rem;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
 .cardlink{
@@ -1141,4 +1144,46 @@ body{
   will-change: transform;
 }
 
+
+
+.footer{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 1.5rem;
+  padding: 3rem 2rem 2rem;
+  background: var(--background);
+  color:var(--content-text);
+}
+
+.tmdb-logo{
+  display: block;
+  width: 50px;
+  height: auto;
+  object-fit: contain;
+  margin-bottom: 0.5rem;
+}
+
+.footer-bottom{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+  width: 100%;
+  border-top: 1px solid var(--accent);
+  padding-top: 1.5rem;
+  font-size: 0.8rem;
+}
+
+.footer-bottom p{
+  margin: 0;
+}
+
+.footer-end{
+  color: var(--content-text);
+  font-style: italic;
+  font-size: 1.3rem;
+  margin: 1rem 0 0;
+}
 /*yikeesss this is sm css im so sorrryyy*/
