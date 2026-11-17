@@ -164,6 +164,64 @@ function makeElement(tag, className, text){
   return element;
 }
 
+const STATE_MESSAGES = {
+  loading: "Loading...",
+  empty: "Nothing to show here yet.",
+  error: "Something went wrong. Please try again."
+};
+
+const STATE_IMAGES = {
+  loading: null,
+  empty: { light: "somethingwentwrong.svg", dark: "somethingwentwrong.svg" },
+  error: { light: "somethingwentwrong.svg", dark: "somethingwentwrong.svg" }
+};
+
+function addLoadingAnimation(box){
+  const holder = makeElement("div", "loading-animation");
+  holder.setAttribute("aria-hidden", "true");
+  box.append(holder);
+
+  if (typeof lottie === "undefined") return;
+
+  const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+  box.lottie = lottie.loadAnimation({
+    container: holder,
+    renderer: "svg",
+    loop: true,
+    autoplay: !reduceMotion,
+    path: "../assets/movieloading.json"
+  });
+}
+
+function makeStateBox(kind, message, onRetry){
+  const box = makeElement("div", "state-box state-" + kind);
+  box.setAttribute("role", kind === "error" ? "alert" : "status");
+  if (kind === "loading") addLoadingAnimation(box);
+
+  const images = STATE_IMAGES[kind];
+  if (images){
+    ["light", "dark"].forEach(function (mode){
+      const img = document.createElement("img");
+      img.src = "../assets/somethingwentwrong.svg" + images[mode];
+      img.alt = "Image of spilled popcorn";
+      img.className = "state-img" + mode;
+      box.append(img);
+    });
+  }
+
+  box.append(makeElement("p", "state-message", message));
+
+  if (onRetry){
+    const retry = makeElement("button", "card-button", "Try again");
+    retry.type = "button";
+    retry.addEventListener("click", onRetry);
+    box.append(retry);
+  }
+
+  return box;
+}
+
 const loopVideo = document.getElementById("loop");
 const playVideo = document.getElementById("playvideo");
 const playButton = document. getElementById("playbutton");

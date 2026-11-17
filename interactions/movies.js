@@ -119,7 +119,7 @@ function makeMovieCard(movie){
   const img = document.createElement("img");
   img.src = movie.poster_path
     ? imageUrl(movie.poster_path, "w342")
-    : "../assets/error state dark mode.png";
+    : "../assets/movienotfoundthumbnail.svg";
 
   img.alt = `Poster for ${movie.title}`;
 
@@ -174,18 +174,35 @@ function displayMovies(movies, container){
 async function fetchMovies(category){
   const row = createRow(category);
 
-  try {
-    const data = await tmdbFetch(category.endpoint, category.params);
-    displayMovies(data.results, row);
-    const filmstrip = row.parentElement;
-    const index = [...document.querySelectorAll(".category")].indexOf(
-    row.closest(".category")
-  );
+  async function load(){
+    row.innerHTML = "";
+    row.append(makeStateBox("loading", "Loading movies..."));
 
-   animateFilmstrip(filmstrip, index);
-   } catch (error) {
-    console.error("Error fetching movies:", error);
-   }
+    try {
+      const data = await tmdbFetch(category.endpoint, category.params);
+
+      if (data.results.length === 0){
+        row.innerHTML = "";
+        row.append(makeStateBox("empty", "No movies found in this category yet."));
+        return;
+      }
+
+      displayMovies(data.results, row);
+
+      const filmstrip = row.parentElement;
+      const index = [...document.querySelectorAll(".category")].indexOf(
+        row.closest(".category")
+      );
+
+      animateFilmstrip(filmstrip, index);
+    } catch (error){
+      console.error("Error fetching movies:", error);
+      row.innerHTML = "";
+      row.append(makeStateBox("error", "We couldn't load these movies.", load));
+    }
+  }
+
+  load();
 }
 
 movieCategories.forEach(fetchMovies);
