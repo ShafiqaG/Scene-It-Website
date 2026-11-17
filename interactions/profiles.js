@@ -29,7 +29,7 @@ function makeSlide(slide, name){
 
   if (slide.kind === "trailer"){
     const frame = document.createElement("iframe"); //getting the trailer for the movie/show
-    frame.src = `https://www.youtube-nocookie.com/embed/${slide.key}?rel=0`;
+    frame.src = `https://www.youtube-nocookie.com/embed/${slide.key}?rel=0&enablejsapi=1`;
     frame.title = "Trailer for " + name;
     frame.allowFullscreen = true;
     item.append(frame);
@@ -44,6 +44,29 @@ function makeSlide(slide, name){
   return item;
 }
 
+function stopTrailerWhenHidden(track){
+  const trailer = track.querySelector("iframe");
+  if (!trailer) return;
+  const observer = new IntersectionObserver(function(entries){
+    entries.forEach(function(entry){
+      if (!entry.isIntersecting){
+        trailer.contentWindow.postMessage(
+          JSON.stringify({
+            event: "command",
+            func: "pauseVideo",
+            args: []
+          }),
+          "*"
+        );
+      }
+    });
+  }, {
+    root: track,
+    threshold: 0.5
+  });
+  observer.observe(trailer);
+}
+
 function makeCarousel(slides, name){
   const wrap = makeElement("div", "rowwrap profile-carousel");
   const track = makeElement("div", "profile-slides");
@@ -55,6 +78,7 @@ function makeCarousel(slides, name){
   wrap.append(track);
 
   if (slides.length > 1){
+    stopTrailerWhenHidden(track);
     wrap.prepend(makeArrow("previous", track, "slides"));
     wrap.append(makeArrow("next", track, "slides"));
   }

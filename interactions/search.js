@@ -1,3 +1,5 @@
+gsap.registerPlugin(ScrollTrigger);
+
 function makeSearchCard(item){
 
   const card = document.createElement("a");
@@ -28,6 +30,25 @@ function makeSearchCard(item){
   card.append(img, title);
 
   return card;
+}
+
+function animateSearchResults(){
+
+  const cards = document.querySelectorAll("#search-results .filmframe");
+
+  gsap.from(cards,{
+    opacity: 0,
+    y: 35,
+    duration: 0.7,
+    stagger: 0.12,
+    ease: "power2.out",
+    scrollTrigger:{
+      trigger: "#search-results",
+      start: "top 85%",
+      toggleActions: "play none none none"
+    }
+  });
+
 }
 
 async function searchContent(){
@@ -65,10 +86,18 @@ async function searchContent(){
       ["movie", "tv", "person"].includes(item.media_type)
     );
 
-    if (filteredResults.length === 0){
-      results.textContent = "No results found. Try another search.";
-      return;
-    }
+   if (filteredResults.length === 0){
+  results.innerHTML = `
+    <div class="search-empty">
+      <p>No results found.</p>
+      <img src="../assets/error state dark mode.png" alt="Unavailable showing">
+      <h3>Uh oh, this showing is currently unavailable.</h3>
+    </div>
+  `;
+  return;
+}
+
+
 filteredResults.forEach(item =>{
 
   const frame = document.createElement("div");
@@ -80,6 +109,8 @@ filteredResults.forEach(item =>{
   results.appendChild(frame);
 
 });
+
+animateSearchResults();
 
   } catch (error){
     console.error("Search error:", error);

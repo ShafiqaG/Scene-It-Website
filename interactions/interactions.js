@@ -80,8 +80,8 @@ const navLinks = [
       <img src="../assets/theme.svg" alt="menu icon">
     </button>`;
 
-}
-  
+
+} 
  
     function buildFooter(){
         const footer = document.getElementById("footer")
@@ -97,6 +97,8 @@ const navLinks = [
         window.addEventListener("scroll", function(){
             header.classList.toggle("compact", window.scrollY > 40);
         });
+
+        
     }
 
     buildHeader();
@@ -104,37 +106,101 @@ const navLinks = [
     setupHeaderScroll();
     setupThemeToggle();
 
-async function loadPosterCard(cardName, endpoint, titleField){
-  const media = document.querySelector(`[data-card="${cardName}"] .card-media`);
+async function loadCategoryCarousel(cardName, endpoint, titleField){
+  const media = document.querySelector(
+    `[data-card="${cardName}"] .card-media`
+  );
   if (!media) return;
-
-  const data = await tmdbFetch(endpoint);
-  const item = data.results.find(function (result) {return result.poster_path;});
-  if (!item) return;
-
-  const img = document.createElement("img");
-  img.src = imageUrl(item.poster_path, "w500");
-  img.alt = "Poster for " + item[titleField];
-  media.appendChild(img);}
-
-  async function loadDirectorCard(){
-  const media = document.querySelector('[data-card="directors"] .card-media');
-  if (!media) return;
-
-  const id = featuredDirectorIDS[Math.floor(Math.random() * featuredDirectorIDS.length)];
-  const person = await tmdbFetch("/person/" + id);
-  if (!person.profile_path) return;
-
-  const img = document.createElement("img");
-  img.src = imageUrl(person.profile_path, "h632");
-  img.alt = "Photo of " + person.name;
-  media.appendChild(img);
+  try{
+    const data = await tmdbFetch(endpoint);
+    const images = data.results
+      .filter(item => item.poster_path)
+      .slice(0, 6)
+      .map(item => ({
+        src: imageUrl(item.poster_path, "w500"),
+        title: item[titleField]
+      }));
+    startImageCarousel(media, images, `${cardName} poster`);
+  } catch(error){
+    console.error(`Could not load ${cardName} carousel:`, error);
+  }
 }
 
+async function loadDirectorCarousel(){
+  const media = document.querySelector(
+    '[data-card="directors"] .card-media'
+  );
+  if (!media) return;
+  try{
+    const people = await Promise.all(
+      featuredDirectorIDS.slice(0, 6).map(id =>
+        tmdbFetch("/person/" + id)
+      )
+    );
+    const images = people
+      .filter(person => person.profile_path)
+      .map(person => ({
+        src: imageUrl(person.profile_path, "h632"),
+        title: person.name
+      }));
+    startImageCarousel(media, images, "Director portrait");
+  } catch(error){
+    console.error("Could not load directors carousel:", error);
+  }
+}
 
-loadPosterCard("movies", "/trending/movie/week", "title");
-loadPosterCard("shows", "/trending/tv/week", "name");
-loadDirectorCard();
+function startImageCarousel(media, images, altText){
+  if (!media || images.length === 0) return;
+  media.style.position = "relative";
+  media.style.overflow = "hidden";
+
+  let currentIndex = 0;
+
+  function createImage(image){
+    const img = document.createElement("img");
+    img.src = image.src;
+    img.alt = image.title || altText;
+    img.style.position = "absolute";
+    img.style.inset = "0";
+    img.style.width = "100%";
+    img.style.height = "100%";
+    img.style.objectFit = "cover";
+    return img;
+  }
+
+  let currentImage = createImage(images[0]);
+  media.replaceChildren(currentImage);
+  if (images.length === 1) return;
+
+  setInterval(() =>{
+    const nextIndex = (currentIndex + 1) % images.length;
+    const nextImage = createImage(images[nextIndex]);
+    nextImage.style.transform = "translateX(100%)";
+    media.appendChild(nextImage);
+
+    gsap.timeline({
+      onComplete: () =>{
+        currentImage.remove();
+        currentImage = nextImage;
+        currentIndex = nextIndex;
+      }
+    })
+    .to(currentImage,{
+      x: "-100%",
+      duration: 0.8,
+      ease: "power2.inOut"
+    }, 0)
+    .to(nextImage,{
+      x: "0%",
+      duration: 0.8,
+      ease: "power2.inOut"
+    }, 0);
+  },5000);
+}
+
+loadCategoryCarousel("movies", "/trending/movie/week", "title");
+loadCategoryCarousel("shows", "/trending/tv/week", "name");
+loadDirectorCarousel();
 
 function makeArrow(direction, grid, what = "movies"){
   const button = document.createElement("button");
@@ -167,7 +233,7 @@ function makeElement(tag, className, text){
 const STATE_MESSAGES = {
   loading: "Loading...",
   empty: "Nothing to show here yet.",
-  error: "Something went wrong. Please try again."
+  error: "Whoopsie! Something went wrong. Please try again."
 };
 
 const STATE_IMAGES = {
@@ -192,6 +258,31 @@ function addLoadingAnimation(box){
     autoplay: !reduceMotion,
     path: "../assets/movieloading.json"
   });
+}
+
+function pageEntrance(){
+
+  const main = document.querySelector("main");
+
+  if (!main) return;
+
+  const reduceMotion = window.matchMedia(
+    "(prefers-reduced-motion: reduce)"
+  ).matches;
+
+  if (reduceMotion) return;
+
+  window.addEventListener("load", () =>{
+
+    gsap.from(main,{
+      opacity: 0,
+      y: 12,
+      duration: 0.8,
+      ease: "power2.out"
+    });
+
+  }, { once: true });
+
 }
 
 function makeStateBox(kind, message, onRetry){
@@ -252,3 +343,5 @@ if(playButton){
 });
 
 }
+
+pageEntrance();

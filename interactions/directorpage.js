@@ -44,7 +44,18 @@ function makeDirectorCard(person){
   if (facts.length > 0) back.append(makeElement("p", "facts", facts.join(" · ")));
   back.append(bio, readMore, flipBack);
 
+    function collapseBio(){
+    bio.classList.add("is-clamped");
+    bio.removeAttribute("tabindex");
+    readMore.hidden = bioText.length < 250;
+    card.style.height = "";
+
+    const row = card.closest(".director-row");
+    if (row) row.classList.remove("expanded");
+  }
+
     function setFlipped(flipped, moveFocus = true){
+        if (!flipped) collapseBio();
     card.classList.toggle("flipped", flipped);
     front.inert = flipped;
     back.inert = !flipped;
@@ -53,7 +64,10 @@ function makeDirectorCard(person){
 
   if (window.matchMedia("(hover: hover)").matches){
     card.addEventListener("mouseenter", function (){ setFlipped(true, false); });
-    card.addEventListener("mouseleave", function (){ setFlipped(false, false); });
+    card.addEventListener("mouseleave", function (){
+         const row = card.closest(".director-row");
+      if (!row.classList.contains("expanded")) setFlipped(false, false);
+    });
   }
 
   back.inert = true;
@@ -62,15 +76,20 @@ function makeDirectorCard(person){
   flipBack.addEventListener("click", function (){ setFlipped(false); });
 
   readMore.addEventListener("click", function (){
-    const expanded = bio.classList.toggle("is-clamped") === false;
-    readMore.textContent = expanded ? "Show less" : "Read more";
-    readMore.setAttribute("aria-expanded", String(expanded));
+    const row = card.closest(".director-row");
 
-    if (expanded) {
-      bio.tabIndex = 0;
-    } else {
-      bio.removeAttribute("tabindex");
-    }
+    bio.classList.remove("is-clamped");
+    bio.tabIndex = 0;
+    readMore.hidden = true;
+    row.classList.add("expanded");
+    flipBack.focus({ preventScroll: true });
+
+    const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    setTimeout(function (){
+      if (row.classList.contains("expanded")){
+        card.style.height = (back.scrollHeight + 24) + "px";
+      }
+    }, reduce ? 0 : 450);
   });
 
   inner.append(front, back);
