@@ -5,11 +5,26 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Scene It!</title>
     <link rel="stylesheet" href="stylesheets/intropage.css" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.13.0/gsap.min.js"></script>
     <script src="interactions/interactions.js" defer></script>
   </head>
   <body class="landing">
 
     <main id="main" class="intro">
+
+      <div class="filmstrip filmstrip-left">
+  <div class="filmstrip-track">
+    <img src="assets/beigefilmstrip.svg" alt="image of filmstrip">
+    <img src="assets/beigefilmstrip.svg" alt="image of filmstrip">
+  </div>
+</div>
+
+<div class="filmstrip filmstrip-right">
+  <div class="filmstrip-track">
+    <img src="assets/beigefilmstrip.svg" alt="image of filmstrip">
+    <img src="assets/beigefilmstrip.svg" alt="image of filmstrip">
+  </div>
+</div>
 
       <video
         id="loop"
@@ -34,6 +49,10 @@
            <img src="assets/play button.png" alt="a triangle button">
         </button>
       </div>
+
+      <footer class="intro-footer">
+        <a href="pages/home.html">Enter Scene It!</a>
+      </footer>
 
     </main>
   </body>

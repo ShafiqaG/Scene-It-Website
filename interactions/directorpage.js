@@ -1,3 +1,44 @@
+gsap.set(".clapperboard",{
+  opacity: 0,
+  x: (index) => index === 0 ? -100 : 100
+});
+
+gsap.set(".clapper-closed",{
+  opacity: 0
+});
+
+const directorIntro = gsap.timeline();
+
+directorIntro
+  .to(".clapperboard",{
+    opacity: 1,
+    x: 0,
+    duration: 0.8,
+    ease: "power3.out"
+  })
+  .to(".clapper-open",{
+    opacity: 0,
+    duration: 0.1
+  })
+  .to(".clapper-closed",{
+    opacity: 1,
+    duration: 0.1
+  }, "<")
+  .to(".clapperboard",{
+    y: -8,
+    duration: 0.12,
+    yoyo: true,
+    repeat: 1,
+    ease: "power1.inOut"
+  })
+
+  .to(".clapperboard",{
+  opacity: 0,
+  duration: 0.6,
+  delay: 1,
+  ease: "power2.out"
+});
+
 const DIRECTORSPERBATCH = 6;
 let nextDirector = 0;
 

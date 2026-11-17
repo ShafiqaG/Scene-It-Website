@@ -36,7 +36,7 @@ body.landing{
 .playbutton{
     position: absolute;
     left: 52%;
-    top: 43%;
+    top: 44.5%;
     transform:translate(-50%, -50%);
     width: 140px;
     height: 140px;
@@ -64,3 +64,96 @@ body.landing{
     display:none;
 }
 
+@media (max-width: 600px){
+  .intro {
+    height: 100svh;
+    min-height: 500px;
+  }
+
+  .introvideo{
+    object-fit: cover;
+  }
+
+  .playbutton{
+    left: 50%;
+    top: 47%;
+    width: 85px;
+    height: 85px;
+  }
+}
+
+.intro-footer{
+    position: absolute;
+    bottom: 1.5rem;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 20;
+    text-align: center;
+}
+
+.intro-footer a{
+    color: white;
+    font-family: var(--font-body);
+    font-size: 1.1rem;
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+.intro-footer a:hover{
+    color: var(--accent);
+    text-decoration: underline;
+}
+
+.intro-footer a:focus-visible{
+    outline: 2px solid white;
+    outline-offset: 5px;
+}
+
+.filmstrip{
+    position: absolute;
+    top: 50%;
+    z-index: 5;
+    width: 100vh;
+    height: 90px;
+    pointer-events: none;
+    overflow: hidden;
+}
+
+.filmstrip-track{
+    display: flex;
+    flex-direction: row;
+    width: 200%;
+    height: 100%;
+}
+
+.filmstrip-track img{
+    flex: 0 0 50%;
+    width: 50%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.filmstrip-left{
+    left: 0;
+    transform: translate(-50%, -50%) rotate(90deg);
+}
+
+.filmstrip-right{
+    right: 0;
+    transform: translate(50%, -50%) rotate(90deg);
+}
+
+@media (max-width: 600px){
+    .filmstrip{
+        width: 115vh;
+        height: 55px;
+    }
+
+    .filmstrip-left{
+        transform: translate(-45%, -50%) rotate(90deg);
+    }
+
+    .filmstrip-right{
+        transform: translate(45%, -50%) rotate(90deg);
+    }
+}

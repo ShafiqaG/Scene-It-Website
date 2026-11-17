@@ -61,7 +61,7 @@ const navLinks = [
 
      header.innerHTML = `
     <a class="logo" href="home.html">
-      <img src="../assets/website logo.png" alt="Scene It! home">
+      <img src="../assets/SCENE IT!.svg" alt="Scene It! home">
     </a>
 
     <nav class="main-nav" aria-label="Main navigation">
@@ -82,7 +82,9 @@ const navLinks = [
 
 
 } 
- 
+ const introPath = window.location.pathname.includes("/pages/")
+  ? "../index.html": "index.html";
+
     function buildFooter(){
         const footer = document.getElementById("footer")
         if(!footer) return; 
@@ -92,6 +94,7 @@ const navLinks = [
     <img src="../assets/The_Movie_Database_Logo_0.svg" alt="The Movie Database (TMDB)"class="tmdb-logo">
       <p>Movie and television data provided by TMDB.</p>
       <p>This product uses the TMDB API but is not endorsed or certified by TMDB.</p>
+      <a href="${introPath}">Back to Intro</a>
       <p>© 2026 Scene It!</p>
       <h3 class="footer-end">THE END.</h3>
     </div>
@@ -113,6 +116,84 @@ const navLinks = [
     buildFooter();
     setupHeaderScroll();
     setupThemeToggle();
+
+function createPageNavigation(previousPage, nextPage){
+  const nav = document.createElement("nav");
+  nav.className = "page-navigation";
+  nav.setAttribute("aria-label", "Page navigation");
+
+  function makeArrow(direction, href, tooltipText){
+    const arrow = document.createElement("a");
+    arrow.className = `page-arrow ${direction}`;
+    arrow.href = href;
+    const image = document.createElement("img");
+    image.src = "../assets/arrow.svg";
+    image.alt = "image of arrow";
+    const tooltip = document.createElement("span");
+    tooltip.className = "tooltip";
+    tooltip.textContent = tooltipText;
+    arrow.append(image, tooltip);
+    return arrow;
+  }
+  if (previousPage){
+    nav.append(
+      makeArrow("previous", previousPage.href, previousPage.label)
+    );
+  }
+  if (nextPage){
+    nav.append(
+      makeArrow("next", nextPage.href, nextPage.label)
+    );
+  }
+  return nav;
+}
+
+const pageNavigation ={
+  "home.html":{
+    previous: null,
+    next: { href: "movies.html", label: "Movies" }
+  },
+
+  "movies.html":{
+    previous: { href: "home.html", label: "Home" },
+    next: { href: "shows.html", label: "Shows" }
+  },
+
+  "shows.html":{
+    previous: { href: "movies.html", label: "Movies" },
+    next: { href: "directors.html", label: "Directors" }
+  },
+
+  "directors.html":{
+    previous: { href: "shows.html", label: "Shows" },
+    next: { href: "credits.html", label: "Credits" }
+  },
+
+  "credits.html":{
+    previous: { href: "directors.html", label: "Directors" },
+    next: null
+  }
+};
+
+const currentPage = window.location.pathname.split("/").pop();
+const navigation = pageNavigation[currentPage];
+
+const main = document.querySelector("main");
+
+console.log("Current page:", currentPage);
+console.log("Navigation:", navigation);
+
+if (main && navigation) {
+  const pageArrows = createPageNavigation(
+    navigation.previous,
+    navigation.next
+  );
+
+  main.append(pageArrows);
+
+  console.log("Navigation added to main:", main.contains(pageArrows));
+  console.log("Arrows added:", pageArrows);
+}
 
 async function loadCategoryCarousel(cardName, endpoint, titleField){
   const media = document.querySelector(
@@ -220,7 +301,10 @@ function makeArrow(direction, grid, what = "movies"){
 
   const label = direction === "next" ? "Next" : "Previous";
   button.setAttribute("aria-label", label + " " + what);
-  button.title = label;
+  const tooltip = document.createElement("span");
+  tooltip.className = "tooltip";
+  tooltip.textContent = label;
+  button.append(tooltip);
 
   button.addEventListener("click", function(){
     const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
@@ -302,7 +386,7 @@ function makeStateBox(kind, message, onRetry){
   if (images){
     ["light", "dark"].forEach(function (mode){
       const img = document.createElement("img");
-      img.src = "../assets/somethingwentwrong.svg" + images[mode];
+      img.src = "../assets" + images[mode];
       img.alt = "Image of spilled popcorn";
       img.className = "state-img" + mode;
       box.append(img);
@@ -320,10 +404,59 @@ function makeStateBox(kind, message, onRetry){
 
   return box;
 }
-
 const loopVideo = document.getElementById("loop");
 const playVideo = document.getElementById("playvideo");
 const playButton = document. getElementById("playbutton");
+
+function introButtonAnimation(){
+
+  if (!playButton || typeof gsap === "undefined") return;
+
+  gsap.to(playButton,{
+    scale: 1.13,
+    duration: 0.9,
+    repeat: -1,
+    yoyo: true,
+    ease: "sine.inOut"
+  });
+
+  gsap.to(".playbutton img",{
+    filter: "drop-shadow(0 0 22px rgba(255, 190, 120, 0.9))",
+    duration: 0.9,
+    repeat: -1,
+    yoyo: true,
+    ease: "sine.inOut"
+  });
+}
+introButtonAnimation();
+
+function animateFilmstrips(){
+  const leftTrack = document.querySelector(
+    ".filmstrip-left .filmstrip-track"
+  );
+  const rightTrack = document.querySelector(
+    ".filmstrip-right .filmstrip-track"
+  );
+  console.log("Left:", leftTrack);
+  console.log("Right:", rightTrack);
+  console.log("GSAP:", typeof gsap);
+
+  if (!leftTrack || !rightTrack || typeof gsap === "undefined") return;
+  gsap.to(leftTrack, {
+  xPercent: -50,
+  duration: 18,
+  ease: "none",
+  repeat: -1
+});
+gsap.to(rightTrack, {
+  xPercent: -50,
+  duration: 18,
+  ease: "none",
+  repeat: -1
+});
+}
+
+animateFilmstrips();
 
 if(playButton){
     playButton.addEventListener("click", async () =>{

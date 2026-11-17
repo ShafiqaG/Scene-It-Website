@@ -67,6 +67,50 @@ function stopTrailerWhenHidden(track){
   observer.observe(trailer);
 }
 
+function makeCarouselDots(track, slides){
+  const dots = makeElement("div", "carousel-dots");
+
+  slides.forEach(function (_, index){
+    const dot = makeElement("button", "carousel-dot");
+    dot.type = "button";
+    dot.setAttribute("aria-label", `Go to slide ${index + 1}`);
+
+    dot.addEventListener("click", function(){
+      const slide = track.children[index];
+
+      track.scrollTo({
+        left: slide.offsetLeft - track.offsetLeft,
+        behavior: "smooth"
+      });
+    });
+
+    dots.append(dot);
+  });
+
+  return dots;
+}
+
+function updateCarouselDots(track, dots){
+  const slides = [...track.children];
+  const observer = new IntersectionObserver(function(entries){
+    entries.forEach(function(entry){
+      if (entry.isIntersecting){
+        const index = slides.indexOf(entry.target);
+        dots.querySelectorAll(".carousel-dot").forEach(function(dot, i){
+        dot.classList.toggle("active", i === index);
+        dot.setAttribute("aria-current", i === index ? "true" : "false");
+        });
+      }
+    });
+  }, {
+    root: track,
+    threshold: 0.6
+  });
+  slides.forEach(function(slide){
+    observer.observe(slide);
+  });
+}
+
 function makeCarousel(slides, name){
   const wrap = makeElement("div", "rowwrap profile-carousel");
   const track = makeElement("div", "profile-slides");
@@ -81,6 +125,11 @@ function makeCarousel(slides, name){
     stopTrailerWhenHidden(track);
     wrap.prepend(makeArrow("previous", track, "slides"));
     wrap.append(makeArrow("next", track, "slides"));
+    
+    const dots = makeCarouselDots(track, slides);
+    wrap.append(dots);
+    updateCarouselDots(track, dots);
+   
   }
 
   return wrap;

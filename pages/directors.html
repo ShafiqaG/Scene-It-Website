@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Directors</title>
+    <link rel="stylesheet" href="../stylesheets/director.css">
     <link rel="stylesheet" href="../stylesheets/styles.css">
     <script src="../interactions/config.js" defer></script>
     <script src="../interactions/api.js" defer></script>
@@ -15,14 +16,25 @@
     
 
 </head>
-<body>
+<body class="directors-page">
     <a class="next" href="#main">Next page</a>
 
     <header class="header" id="header"></header>
 
     <main id="main">
 
+ <div class="directors-title">
+  <div class="clapperboard left">
+    <img src="../assets/clapperboardopen.svg" class="clapper-open" alt="image of clapperboard">
+    <img src="../assets/clapperboardclosed.svg" class="clapper-closed" alt="image of clapperboard">
+  </div>
+
     <h1>DIRECTORS</h1>
+  <div class="clapperboard right">
+    <img src="../assets/clapperboardopen.svg" class="clapper-open" alt="image of clapperboard">
+    <img src="../assets/clapperboardclosed.svg" class="clapper-closed" alt="image of clapperboard">
+   </div>
+  </div>
     <p>Meet some of the famous names behind the camera</p>
 
     <div id="director-list" class="director-list"></div>

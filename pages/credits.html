@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Credits</title>
+    <link rel="stylesheet" href="../stylesheets/credits.css">
     <link rel="stylesheet" href="../stylesheets/styles.css">
     <script src="../interactions/interactions.js" defer></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js" defer></script>
@@ -15,61 +16,124 @@
     <header class="header" id="header"></header>
 
     <main id="main">
+    
+    <div id="credits-intro" class="credits-intro">
+  <video id="credits-video" autoplay muted playsinline>
+    <source src="../assets/profile loading state.mp4" type="video/mp4">
+  </video>
+</div>
+        
 
     <h1>CREDITS</h1>
 
 
   <div id="credits-controls" class="credits-controls" hidden>
-    <button id="credits-toggle" class="card-button" type="button">Pause</button>
-    <button id="credits-list" class="card-button" type="button">Show as list</button>
-  </div>
+  <button id="credits-toggle" class="card-button" type="button">
+    <img id="pause-play-toggle" src="../assets/pause.svg" alt="Pause credits">
+  </button>
 
-</main>
+  <button id="credits-list" class="card-button" type="button">
+    <img src="../assets/list.svg" alt="Show credits as a list">
+  </button>
+</div>
+
+    <div id="credits-stage" class="credits-stage">
+    <div id="credits-roll" class="credits-roll">
+
   <p class="credits-thanks">Thanks for browsing!</p>
 
-  <dl class="credits-list">
+  <div class="credits-list">
+
+  <dl class="credits-row">
     <dt>Design and developed by</dt>
     <dd>Shafiqa Guman</dd>
+  </dl>
 
-    <dt>Data and images</dt>
+  <dl class="credits-row">
+    <dt>Data and images brought to you by</dt>
     <dd>The Movie Database (TMDB)</dd>
+  </dl>
 
-    <dt>Featured Fonts</dt>
-    <dd>Diplomata, Asset, Instrument Serif and Aref Ruqaa, from Google Fonts</dd>
+  <dl class="credits-row">
+    <dt>Featured Google Fonts</dt>
+    <dd>
+      Diplomata
+      <span>Instrument Serif</span>
+      <span>Aref Ruqaa</span>
+    </dd>
+  </dl>
 
+  <dl class="credits-row">
     <dt>Animations</dt>
     <dd>GSAP</dd>
+  </dl>
 
-    <dt>Assets created using</dt>
-    <dd>Krita</dd>
-    <dd>Canva</dd>
-    <dd>Microsoft Clipchamp</dd>
+  <dl class="credits-row">
+    <dt>Assets Created by</dt>
+    <dd>Shafiqa Guman</dd>
+  </dl>
 
-    <dt>Icons and logo</dt>
-    <dd>Designed by Shafiqa Guman in Figma</dd>
+  <dl class="credits-row">
+    <dt>Assets Created Using</dt>
+    <dd>
+      Krita
+      <span>Canva</span>
+      <span>Microsoft Clipchamp</span>
+    </dd>
+  </dl>
 
+  <dl class="credits-row">
+    <dt>Icons and logo Designed in</dt>
+    <dd>Figma</dd>
+  </dl>
+
+  <dl class="credits-row">
     <dt>Course</dt>
     <dd>Interactive Media 3B</dd>
-
-    <dt>Special Thanks to</dt>
-    <dd>Usability Testers</dd>
-
   </dl>
+
+  <dl class="credits-row">
+    <dt>Special Thanks to</dt>
+    <dd>
+      Usability Testers:
+      <span>Friends</span>
+      <span>Family</span>
+      <span>Class Peers</span>
+      <span>Fourth Years</span>
+      <span>Wits Students</span>
+    </dd>
+  </dl>
+
+  <dl class="credits-row">
+    <dt>Assistance From</dt>
+    <dd>
+      Course Content
+      <span>Andre's GSAP and API lecture videos</span>
+      <span>Portfolio Website code references</span>
+      <span>YouTube Tutorials</span>
+      <span>Claude AI</span>
+      <span>Google Search</span>
+    </dd>
+  </dl>
+
+</div>
+
+  
+   <p class="credits-signoff">Well, that's all folks!</p>
 
   <section class="credits-tmdb" aria-label="TMDB attribution">
 
-    <div id="credits-stage" class="credits-stage">
-    <div id="credits-roll" class="credits-roll"></div>
-  </div>
-
+    <img src="../assets/Brandfetch_Brandfetch_Logo_1.svg"alt="Brandfetch logo">
+    <img src="../assets/Canva_Logo_0.svg"alt="Canva logo">
+    <img src="../assets/Krita_id_IHEXH5H_1.svg"alt="Krita logo">
+    <img src="../assets/Figma_Logo_0.svg"alt="Figma logo">
     <img src="../assets/The_Movie_Database_Logo_0.svg" alt="The Movie Database (TMDB) logo">
-    <p>This product uses the TMDB API but is not certified by it.</p>
+    <p>This product uses the TMDB API but is not endorsed or certified by it.</p>
+
   </section>
 
-  <p class="credits-signoff">Well, that's all folks!</p>
+ 
 </main>
-
-    </main>
 
     <footer class="footer" id="footer"></footer>
 
