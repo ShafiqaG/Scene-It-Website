@@ -67,6 +67,10 @@
 }
 
 .director-card{
+  scroll-margin-top: 6rem;
+}
+
+.director-card{
   flex: 0 0 18rem;
   height: 26rem;
   perspective: 1200px;
@@ -130,6 +134,20 @@
 
   .director-row.expanded .director-card{
     width: 100%;
+  }
+
+  .director-row.expanded .director-card,
+  .director-row.expanded .filmography{
+    flex: none;
+  }
+
+  .bio:not(.is-clamped){
+    columns: 1;
+  }
+
+  .card-button{
+    min-height: 2.75rem;
+    padding: 0.6rem 1.25rem;
   }
 }
 

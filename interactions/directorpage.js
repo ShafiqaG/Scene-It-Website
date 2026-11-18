@@ -115,23 +115,37 @@ function makeDirectorCard(person){
 
   front.addEventListener("click", function (){ setFlipped(true); });
   flipBack.addEventListener("click", function (){ setFlipped(false); });
-
   readMore.addEventListener("click", function (){
-    const row = card.closest(".director-row");
-
-    bio.classList.remove("is-clamped");
-    bio.tabIndex = 0;
-    readMore.hidden = true;
-    row.classList.add("expanded");
-    flipBack.focus({ preventScroll: true });
-
-    const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-    setTimeout(function (){
-      if (row.classList.contains("expanded")){
-        card.style.height = (back.scrollHeight + 24) + "px";
-      }
-    }, reduce ? 0 : 450);
+  const row = card.closest(".director-row");
+  const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  bio.classList.remove("is-clamped");
+  bio.tabIndex = 0;
+  readMore.hidden = true;
+  row.classList.add("expanded");
+  flipBack.focus({ preventScroll: true });
+  const expandedHeight = back.scrollHeight + 24;
+  if (reduce || typeof gsap === "undefined"){
+    card.style.height = expandedHeight + "px";
+    return;
+  }
+  gsap.set(bio,{
+    opacity: 0,
+    y: 12
   });
+  gsap.to(card,{
+    height: expandedHeight,
+    duration: 0.6,
+    ease: "power2.out",
+    onComplete: function (){
+      gsap.to(bio,{
+        opacity: 1,
+        y: 0,
+        duration: 0.6,
+        ease: "power2.out"
+      });
+    }
+  });
+});
 
   inner.append(front, back);
   card.append(inner);
