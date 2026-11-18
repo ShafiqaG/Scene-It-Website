@@ -386,7 +386,7 @@ function makeStateBox(kind, message, onRetry){
   if (images){
     ["light", "dark"].forEach(function (mode){
       const img = document.createElement("img");
-      img.src = "../assets/somethingwentwrong.svg" + images[mode];
+      img.src = "../assets/" + images[mode];
       img.alt = "Image of spilled popcorn";
       img.className = "state-img" + mode;
       box.append(img);
