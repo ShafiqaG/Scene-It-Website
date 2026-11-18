@@ -51,9 +51,9 @@ if (stage && roll && controls && typeof gsap !== "undefined" && !reduceMotion){
           }
         });
       }, { once: true });
-      introVideo.play().catch(() =>{
-        intro.remove();
-        startRoll();
+      introVideo.play().catch((error) =>{
+        console.warn("Video autoplay blocked", error)
+       introVideo.controls = true;
       });
 
     } else{
