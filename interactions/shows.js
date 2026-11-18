@@ -99,8 +99,8 @@ function animateFilmstrip(filmstrip, index){
       ease: "none",
       scrollTrigger: {
         trigger: filmstrip,
-        start: "top 85%",
-        end: "top 45%",
+        start: "top 100%",
+        end: "top 60%",
         scrub: 1
       }
     }
